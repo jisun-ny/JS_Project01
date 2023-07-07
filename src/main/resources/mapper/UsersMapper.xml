@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="users">
+
+	<delete id="delete" parameterType="usersDto">
+		DELETE FROM users
+		where id = #{id}
+	</delete>
+
+	<update id="update" parameterType="usersDto">
+		UPDATE users
+		SET email = #{email}, profile = #{profile}
+		WHERE id = #{id}
+	</update>
+
+	
+	<update id="updatePwd" parameterType="usersDto">
+		UPDATE users
+		SET pwd = #{newPwd}
+		WHERE id = #{id}
+	</update>
+
+	<select id="getData" parameterType="java.lang.String" resultType = "usersDto">
+		SELECT id, pwd, email, profile, regdate
+		FROM users
+		WHERE id = #{id}
+	</select>
+	
+	<insert id="insert"  parameterType="usersDto">
+		INSERT INTO users
+		(id, pwd, email, regdate)
+		VALUES (#{id}, #{pwd}, #{email}, SYSDATE)
+	</insert>
+
+</mapper>
