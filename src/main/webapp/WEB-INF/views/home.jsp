@@ -8,7 +8,7 @@
 <title>/home.jsp</title>
 </head>
 <body>
-	<h1>스프링 이용해서 cafe 기능 만들어보기</h1>
+	<h1></h1>
 	<div class="container">
 		<c:choose>
 			<c:when test="${empty sessionScope.id }">
@@ -17,12 +17,23 @@
 			</c:when>
 			<c:otherwise>
 				<p>
-					<a href="${pageContext.request.contextPath }/users/info">${id }</a>로그인 중... 
-					<a href="${pageContext.request.contextPath }/users/logout">로그아웃</a>
+					<a href="${pageContext.request.contextPath }/users/info">${id }</a>로그인
+					중... <a href="${pageContext.request.contextPath }/users/logout">로그아웃</a>
 				</p>
 			</c:otherwise>
 		</c:choose>
 	</div>
 
+	<ul>
+		<li>
+			<a href="${pageContext.request.contextPath }/cafe/forum">자유게시판</a>
+		</li>
+		<li>
+			<a href="${pageContext.request.contextPath }/cafe/selling">[장터]팔아요</a>
+		</li>
+		<li>
+			<a href="${pageContext.request.contextPath }/cafe/wanted">[장터]구해요</a>
+		</li>
+	</ul>
 </body>
 </html>
