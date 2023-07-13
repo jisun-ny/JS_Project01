@@ -8,10 +8,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 	<typeAlias type="com.jiseon.project01.users.dto.UsersDto" alias="usersDto"/>
 	<typeAlias type="com.jiseon.project01.cafe.dto.CafeForumDto" alias="cafeForumDto"/>
+	<typeAlias type="com.jiseon.project01.cafe.dto.CafeSellingDto" alias="cafeSellingDto"/>
+	<typeAlias type="com.jiseon.project01.cafe.dto.CafeWantedDto" alias="cafeWantedDto"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/UsersMapper.xml"/>
 		<mapper resource="mapper/CafeForumMapper.xml"/>
+		<mapper resource="mapper/CafeSellingMapper.xml"/>
+		<mapper resource="mapper/CafeWantedMapper.xml"/>
 	</mappers>
 </configuration>

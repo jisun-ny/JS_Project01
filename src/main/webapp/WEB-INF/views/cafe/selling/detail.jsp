@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/cafe/forum/detail.jsp</title>
+<title>/views/cafe/selling/detail.jsp</title>
 </head>
 <body>
 	<div class="container">
@@ -59,17 +59,15 @@
 		<c:if test="${sessionScope.id eq dto.writer}">
 			<a href="updateform?num=${dto.num }">수정</a>
 			<a href="javascript:" onclick="deleteConfirm()">삭제</a>
-			<script>
-				function deleteConfirm() {
-					const allowsDelete = confirm("이 글을 삭제하시겠습니까?");
-					if(allowsDelete) {
-						location.href = "delete?num=${dto.num}";
+				<script>
+					function deleteConfirm() {
+						const allowsDelete = confirm("이 글을 삭제하시겠습니까?");
+						if(allowsDelete) {
+							location.href = "delete?num=${dto.num}";
+						}
 					}
-				}
-			</script>
+				</script>
 		</c:if>
-		
-	
 	</div>
 </body>
 </html>

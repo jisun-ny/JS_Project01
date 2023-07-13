@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cafeForum">
+<mapper namespace="cafeWanted">
 
 	<sql id="searchCondition">
 		<choose>
@@ -18,19 +18,19 @@
 		</choose>
 	</sql>
 
-	<insert id="insert" parameterType="cafeForumDto">
-		INSERT INTO selling_cafe
+	<insert id="insert" parameterType="cafeWantedDto">
+		INSERT INTO wanted_cafe
 		(num, writer, title, imagePath, content, viewCount, regdate)
-		VALUES (selling_cafe_seq.NEXTVAL, #{writer}, #{title}, #{imagePath}, #{content}, #{viewCount}, SYSDATE)
+		VALUES (wanted_cafe_seq.NEXTVAL, #{writer}, #{title}, #{imagePath}, #{content}, #{viewCount}, SYSDATE)
 	</insert>
 	
-	<select id="getList" parameterType="cafeForumDto" resultType="cafeForumDto">
+	<select id="getList" parameterType="cafeWantedDto" resultType="cafeWantedDto">
 		SELECT *
 		FROM
 			(SELECT result1.*, ROWNUM AS rnum
 			FROM
 				(SELECT num, writer, title, viewCount, regdate
-				FROM selling_cafe
+				FROM wanted_cafe
 				<include refid="searchCondition"/>
 				ORDER BY num DESC) result1)
 		<![CDATA[
@@ -38,48 +38,48 @@
 		]]>		
 	</select>
 	
-	<select id="getCount" parameterType="cafeForumDto" resultType="int">
+	<select id="getCount" parameterType="cafeWantedDto" resultType="int">
 		SELECT NVL(MAX(ROWNUM), 0)
-		FROM selling_cafe
+		FROM wanted_cafe
 		<include refid="searchCondition"/>
 	</select>
 	
-	<select id="getData" parameterType="int" resultType="cafeForumDto">
+	<select id="getData" parameterType="int" resultType="cafeWantedDto">
 		SELECT result1.*
 		FROM
 			(SELECT num, writer, title, imagePath, content, viewCount, TO_CHAR(regdate, 'YY.MM.DD HH24:MI') AS regdate,
 			LAG(num, 1, 0) OVER (ORDER BY num DESC) nextNum,
 			LEAD(num, 1, 0) OVER (ORDER BY num DESC) prevNum
-			FROM selling_cafe) result1
+			FROM wanted_cafe) result1
 		WHERE num = #{num}
 	</select>
 	
-	<select id="getDataWKey" parameterType="cafeForumDto" resultType="cafeForumDto">
+	<select id="getDataWKey" parameterType="cafeWantedDto" resultType="cafeWantedDto">
 		SELECT result1.*
 		FROM
 			(SELECT num, writer, title, imagePath, content, viewCount, TO_CHAR(regdate, 'YY.MM.DD HH24:MI') AS regdate,
 			LAG(num, 1, 0) OVER (ORDER BY num DESC) nextNum,
 			LEAD(num, 1, 0) OVER (ORDER BY num DESC) prevNum
-			FROM selling_cafe
+			FROM wanted_cafe
 			<include refid="searchCondition"/>
 			) result1
 		WHERE num = #{num}
 	</select>
 	
 	<update id="addViewCount" parameterType="int">
-		UPDATE selling_cafe
+		UPDATE wanted_cafe
 		SET viewCount = viewCount + 1
 		WHERE num = #{num}
 	</update>
 	
-	<update id="update" parameterType="cafeForumDto" >
-		UPDATE selling_cafe
+	<update id="update" parameterType="cafeWantedDto" >
+		UPDATE wanted_cafe
 		SET title = #{title}, imagePath = #{imagePath}, content = #{content}
 		WHERE num = #{num}
 	</update>
 	
 	<delete id="delete" parameterType="int">
-	DELETE FROM selling_cafe
+	DELETE FROM wanted_cafe
 	WHERE num = #{num}
 	</delete>
 	

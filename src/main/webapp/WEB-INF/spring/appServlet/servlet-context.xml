@@ -81,7 +81,7 @@
 			</interceptor>
 			
 			<interceptor>
-				<mapping path="/cafe/* "/>
+				<mapping path="/cafe/*"/>
 				<exclude-mapping path="/cafe/forum"/>
 				<exclude-mapping path="/cafe/selling"/>
 				<exclude-mapping path="/cafe/wanted"/>
